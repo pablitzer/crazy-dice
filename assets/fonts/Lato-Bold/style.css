@@ -1,0 +1,10 @@
+@font-face {
+  font-family: 'Lato-Bold';
+  src: url('/path-to/Lato-Bold.woff2') format('woff2'),
+       url('/path-to/Lato-Bold.woff') format('woff'),
+       url('/path-to/Lato-Bold.ttf')  format('truetype');
+}
+
+body {
+  font-family: 'Lato-Bold', sans-serif;
+}

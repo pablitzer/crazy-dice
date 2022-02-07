@@ -1,0 +1,10 @@
+@font-face {
+  font-family: 'Lato-Regular';
+  src: url('/path-to/Lato-Regular.woff2') format('woff2'),
+       url('/path-to/Lato-Regular.woff') format('woff'),
+       url('/path-to/Lato-Regular.ttf')  format('truetype');
+}
+
+body {
+  font-family: 'Lato-Regular', sans-serif;
+}

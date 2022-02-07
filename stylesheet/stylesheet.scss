@@ -1,0 +1,41 @@
+/*@import 'cssReset';*/
+@import 'font';
+@import 'customBS';
+
+main {
+  height: 500px;
+}
+
+.current {
+  background-color: $gray-300;
+}
+
+.game-row-1 {
+  height: 25%;
+  min-height: 100px;
+}
+.game-row-2 {
+  height: 10%;
+  min-height: 40px;
+}
+
+.game-row-3 {
+  height: 20%;
+  min-height: 120px;
+}
+.game-row-4 {
+  height: 45%;
+  min-height: 100px;
+}
+
+#dice {
+  width: 82px;
+  height: 82px;
+}
+.player-global-score {
+  font-size: 80px;
+}
+.current-score-box {
+  width: 120px;
+  height: 80px;
+}

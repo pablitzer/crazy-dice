@@ -1,0 +1,10 @@
+@font-face {
+  font-family: 'Lato-Light';
+  src: url('/path-to/Lato-Light.woff2') format('woff2'),
+       url('/path-to/Lato-Light.woff') format('woff'),
+       url('/path-to/Lato-Light.ttf')  format('truetype');
+}
+
+body {
+  font-family: 'Lato-Light', sans-serif;
+}
