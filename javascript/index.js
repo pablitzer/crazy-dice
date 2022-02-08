@@ -1,4 +1,7 @@
 $(() => {
+  //--------------------------
+  // Initalize game status
+  //--------------------------
   const state = {
     iddle: 0,
     started: 0,
@@ -121,6 +124,41 @@ $(() => {
       }
     }
   }
+  //----------------------
+  // animate roll dice
+  //----------------------
+  function rollDice(value) {
+    btHold.prop('disabled', true);
+    btRoll.prop('disabled', true);
+    for (let i = 0; i < 10; i++) {
+      dice.animate(
+        {
+          left: '+=10px',
+        },
+        30,
+        'swing'
+      );
+      dice.animate(
+        {
+          left: '-=10px',
+        },
+        30,
+        'swing'
+      );
+    }
+    dice.animate(
+      {
+        left: '-=0px',
+      },
+      50,
+      'swing',
+      () => {
+        drawDice(value);
+        btHold.prop('disabled', false);
+        btRoll.prop('disabled', false);
+      }
+    );
+  }
 
   //----------------------------------
   // set and display functions
@@ -148,6 +186,10 @@ $(() => {
     game.gameStatus = status;
   };
 
+  //--------------------------
+  // Game logic
+  //--------------------------
+
   const manageGame = (action) => {
     switch (action) {
       case actionType.newGame:
@@ -159,6 +201,7 @@ $(() => {
         setCurrentPlayer(Math.floor(Math.random() * 100) + 1 > 50 ? 1 : 0);
         btHold.prop('disabled', false);
         btRoll.prop('disabled', false);
+        drawDice(6);
         break;
       case actionType.holdScore:
         setGlobalScore(game.currentPlayer, game.scores[game.currentPlayer].globalScore + game.scores[game.currentPlayer].currentScore);
@@ -172,7 +215,7 @@ $(() => {
       case actionType.rollDice:
         {
           const result = Math.floor(Math.random() * 6) + 1;
-          drawDice(result);
+          rollDice(result);
           if (result === 1) {
             // loose on 1 => player change / no score added
             setCurrentScore(game.currentPlayer, 0);
@@ -189,7 +232,8 @@ $(() => {
         break;
     }
   };
-
-  // start Game
+  //---------------------
+  // New game at start
+  //---------------------
   manageGame(actionType.newGame);
 });
