@@ -12017,4 +12017,22 @@ main {
   width: 120px;
   height: 80px;
 }
+
+#player1.current h2, #player1.current .h2,
+#player2.current h2,
+#player2.current .h2 {
+  position: relative;
+}
+
+#player1.current h2::after, #player1.current .h2::after,
+#player2.current h2::after,
+#player2.current .h2::after {
+  content: '\f287';
+  display: inline-block;
+  font-family: bootstrap-icons;
+  font-size: 16px;
+  position: absolute;
+  right: -24px;
+  bottom: 15px;
+}
 /*# sourceMappingURL=stylesheet.css.map */
