@@ -11996,17 +11996,17 @@ main {
 
 .game-row-3 {
   height: 20%;
-  min-height: 120px;
-}
-
-.game-row-4 {
-  height: 45%;
   min-height: 100px;
 }
 
-#dice {
-  width: 82px;
-  height: 82px;
+.game-row-4 {
+  height: 15%;
+  min-height: 60px;
+}
+
+.game-row-5 {
+  height: 30%;
+  min-height: 100px;
 }
 
 .player-global-score {
@@ -12034,5 +12034,16 @@ main {
   position: absolute;
   right: -24px;
   bottom: 15px;
+}
+
+button.action {
+  border: none;
+  background-color: transparent;
+}
+
+button.action:hover:not(:disabled) {
+  color: #198754;
+  -webkit-transform: scale(1.1, 1.1);
+          transform: scale(1.1, 1.1);
 }
 /*# sourceMappingURL=stylesheet.css.map */

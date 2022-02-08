@@ -21,10 +21,14 @@ main {
 
 .game-row-3 {
   height: 20%;
-  min-height: 120px;
+  min-height: 100px;
 }
 .game-row-4 {
-  height: 45%;
+  height: 15%;
+  min-height: 60px;
+}
+.game-row-5 {
+  height: 30%;
   min-height: 100px;
 }
 
@@ -49,4 +53,13 @@ main {
   position: absolute;
   right: -24px;
   bottom: 15px;
+}
+
+button.action {
+  border: none;
+  background-color: transparent;
+}
+button.action:hover:not(:disabled) {
+  color: $success;
+  transform: scale(1.1, 1.1);
 }

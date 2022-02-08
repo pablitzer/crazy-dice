@@ -11,12 +11,14 @@ $(() => {
     newGame: 0,
     holdScore: 1,
     rollDice: 2,
-    winGame: 3,
+    rollResult: 3,
+    winGame: 4,
   };
 
   const game = {
     currentPlayer: undefined,
     gameStatus: state.iddle,
+    rollResult: undefined,
     winner: undefined,
     scores: [
       {
@@ -49,6 +51,7 @@ $(() => {
     },
   ];
   const dice = $('#dice');
+  const messageBox = $('#message-box');
 
   //--------------------------------
   // setup event functions callback
@@ -124,10 +127,11 @@ $(() => {
       }
     }
   }
-  //----------------------
-  // animate roll dice
-  //----------------------
-  function rollDice(value) {
+  //-------------------------------
+  // manage and animate roll dice
+  //-------------------------------
+  const rollDice = () => {
+    game.rollResult = Math.floor(Math.random() * 6) + 1;
     btHold.prop('disabled', true);
     btRoll.prop('disabled', true);
     for (let i = 0; i < 10; i++) {
@@ -153,12 +157,20 @@ $(() => {
       50,
       'swing',
       () => {
-        drawDice(value);
         btHold.prop('disabled', false);
         btRoll.prop('disabled', false);
+        manageGame(actionType.rollResult);
       }
     );
-  }
+  };
+
+  //----------------------------------
+  // Display message
+  //----------------------------------
+  const displayMessage = (text) => {
+    messageBox.text(text);
+    messageBox.fadeIn(500).delay(1000).fadeOut(500);
+  };
 
   //----------------------------------
   // set and display functions
@@ -202,27 +214,32 @@ $(() => {
         btHold.prop('disabled', false);
         btRoll.prop('disabled', false);
         drawDice(6);
+        displayMessage(`Player ${game.currentPlayer + 1} starts!`);
         break;
       case actionType.holdScore:
         setGlobalScore(game.currentPlayer, game.scores[game.currentPlayer].globalScore + game.scores[game.currentPlayer].currentScore);
         setCurrentScore(game.currentPlayer, 0);
         if (game.scores[game.currentPlayer].globalScore >= 100) {
           manageGame(actionType.winGame);
+          displayMessage(`Player ${game.currentPlayer + 1} wins!`);
         } else {
           setCurrentPlayer(game.currentPlayer === 0 ? 1 : 0);
         }
         break;
       case actionType.rollDice:
         {
-          const result = Math.floor(Math.random() * 6) + 1;
-          rollDice(result);
-          if (result === 1) {
-            // loose on 1 => player change / no score added
-            setCurrentScore(game.currentPlayer, 0);
-            setCurrentPlayer(game.currentPlayer === 0 ? 1 : 0);
-          } else {
-            setCurrentScore(game.currentPlayer, game.scores[game.currentPlayer].currentScore + result);
-          }
+          rollDice();
+        }
+        break;
+      case actionType.rollResult:
+        drawDice(game.rollResult);
+        if (game.rollResult === 1) {
+          // loose on 1 => player change / no score added
+          setCurrentScore(game.currentPlayer, 0);
+          setCurrentPlayer(game.currentPlayer === 0 ? 1 : 0);
+          displayMessage('Sorry : turn over');
+        } else {
+          setCurrentScore(game.currentPlayer, game.scores[game.currentPlayer].currentScore + game.rollResult);
         }
         break;
       case actionType.winGame:
@@ -235,5 +252,6 @@ $(() => {
   //---------------------
   // New game at start
   //---------------------
+
   manageGame(actionType.newGame);
 });

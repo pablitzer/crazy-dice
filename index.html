@@ -10,7 +10,7 @@
   </head>
   <body>
     <header class="container">
-      <h1 class="h1">Hello</h1>
+      <h1 class="h1 text-center">Crazy Dice</h1>
     </header>
     <main class="container-md border border-primary position-relative">
       <div id="game" class="row h-100">
@@ -24,7 +24,8 @@
           <div class="row game-row-3">
             <div class="col d-flex justify-content-center align-items-center player-global-score">45</div>
           </div>
-          <div class="row game-row-4">
+          <div class="row game-row-4"></div>
+          <div class="row game-row-5">
             <div class="col d-flex justify-content-center align-items-center">
               <div class="current-score-box d-flex flex-column justify-content-center align-items-center bg-primary">
                 <div class="fs-6 text-uppercase">Current</div>
@@ -37,13 +38,14 @@
           <div class="row game-row-1"></div>
           <div class="row game-row-2">
             <div class="col player-title d-flex justify-content-center">
-              <h2 class="text-uppercase">Player 1</h2>
+              <h2 class="text-uppercase">Player 2</h2>
             </div>
           </div>
           <div class="row game-row-3">
             <div class="col d-flex justify-content-center align-items-center player-global-score">45</div>
           </div>
-          <div class="row game-row-4">
+           <div class="row game-row-4"></div>
+           <div class="row game-row-5">
             <div class="col d-flex justify-content-center align-items-center">
               <div class="current-score-box d-flex flex-column justify-content-center align-items-center bg-primary">
                 <div class="fs-6 text-uppercase">Current</div>
@@ -56,7 +58,7 @@
           <div class="container h-100 w-50">
             <div class="row game-row-1">
               <div class="col d-flex justify-content-center align-items-center">
-                <button id="new-game"><i class="bi bi-plus-circle"> new game</i></button>
+                <button id="new-game" class="action"><i class="bi bi-plus-circle me-2"></i> new game</button>
               </div>
             </div>
             <div class="row game-row-2"></div>
@@ -66,9 +68,12 @@
               </div>
             </div>
             <div class="row game-row-4">
+              <div id="message-box" class="text-primary fs-1 text-center m-auto"></div>
+            </div>
+            <div class="row game-row-5">
               <div class="col d-flex flex-column justify-content-center align-items-center">
-                <button id="roll-dice"class="mb-2"><i class="bi bi-arrow-repeat ">Roll Dice</i></button>
-                <button id="hold-score"><i class="bi bi-box-arrow-in-down"/>Hold</i></button>
+                <button id="roll-dice" class="action mb-2"><i class="bi bi-arrow-repeat me-2"></i>Roll Dice</button>
+                <button id="hold-score"class="action"><i class="bi bi-box-arrow-in-down me-2"/></i>Hold</button>
               </div>
             </div>
           </div>
