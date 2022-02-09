@@ -8,77 +8,79 @@
     <link rel="stylesheet" href="./stylesheet/stylesheet.css" />
     <link rel="stylesheet" href="./node_modules/bootstrap-icons/font/bootstrap-icons.css" />
   </head>
-  <body>
-    <main class="container-lg border border-primary border-5 position-relative vh-100">
-      <div id="game" class="row h-100">
-        <div id="player1" class="col current">
-          <div class="row game-row-1"></div>
-          <div class="row game-row-2">
-            <div class="col player-title d-flex justify-content-center align-items-center">
-              <h2 class="text-uppercase">Player 1</h2>
-            </div>
-          </div>
-          <div class="row game-row-3">
-            <div class="col d-flex justify-content-center align-items-start align-items-sm-center player-global-score lh-1">0</div>
-          </div>
-          <div class="row game-row-4"></div>
-          <div class="row game-row-5">
-            <div class="col d-flex justify-content-center align-items-start align-items-sm-center">
-              <div class="current-score-box d-flex flex-column justify-content-center align-items-center bg-primary">
-                <div class="fs-6 text-uppercase">Current</div>
-                <div class="fs-3 text-white player-current-score">12</div>
+  <body class="d-flex justify-content-center align-items-center vh-100">
+    <div class="wrapper">
+      <main class="container-fluid border border-primary border-5 position-relative h-100">
+        <div id="game" class="row h-100">
+          <div id="player1" class="col current">
+            <div class="row game-row-1"></div>
+            <div class="row game-row-2">
+              <div class="col player-title d-flex justify-content-center align-items-center">
+                <h2 class="text-uppercase">Player 1</h2>
               </div>
             </div>
-          </div>
-        </div>
-        <div id="player2" class="col current">
-          <div class="row game-row-1"></div>
-          <div class="row game-row-2">
-            <div class="col player-title d-flex justify-content-center align-items-center">
-              <h2 class="text-uppercase">Player 2</h2>
-            </div>
-          </div>
-          <div class="row game-row-3">
-            <div class="col d-flex justify-content-center align-items-start align-items-sm-center player-global-score lh-1">0</div>
-          </div>
-          <div class="row game-row-4"></div>
-          <div class="row game-row-5">
-            <div class="col d-flex justify-content-center align-items-start align-items-sm-center">
-              <div class="current-score-box d-flex flex-column justify-content-center align-items-center bg-primary">
-                <div class="fs-6 text-uppercase">Current</div>
-                <div class="fs-3 text-white player-current-score">0</div>
-              </div>
-            </div>
-          </div>
-        </div>
-        <div id="action" class="position-absolute top-0 bottom-0 start-0 end-0 d-flex justify-content-center">
-          <div class="container h-100 w-100">
-            <div class="row game-row-1">
-              <div class="col d-flex justify-content-center align-items-center">
-                <button id="new-game" class="action"><i class="bi bi-plus-circle me-2"></i><span class="text-uppercase">New game</span></button>
-              </div>
-            </div>
-            <div class="row game-row-2"></div>
             <div class="row game-row-3">
-              <div class="col d-flex justify-content-center align-items-end align-items-sm-center position-relative">
-                <canvas id="dice" width="88px" height="88px" class="bg-white shadow position-absolute"></canvas>
+              <div class="col d-flex justify-content-center align-items-start align-items-sm-center player-global-score lh-1">0</div>
+            </div>
+            <div class="row game-row-4"></div>
+            <div class="row game-row-5">
+              <div class="col d-flex justify-content-center align-items-start align-items-sm-center">
+                <div class="current-score-box d-flex flex-column justify-content-center align-items-center bg-primary">
+                  <div class="fs-6 text-uppercase">Current</div>
+                  <div class="fs-3 text-white player-current-score">12</div>
+                </div>
               </div>
             </div>
-            <div class="row game-row-4">
-              <div id="message-box" class="text-primary fs-1 text-center m-auto"></div>
+          </div>
+          <div id="player2" class="col current">
+            <div class="row game-row-1"></div>
+            <div class="row game-row-2">
+              <div class="col player-title d-flex justify-content-center align-items-center">
+                <h2 class="text-uppercase">Player 2</h2>
+              </div>
             </div>
+            <div class="row game-row-3">
+              <div class="col d-flex justify-content-center align-items-start align-items-sm-center player-global-score lh-1">0</div>
+            </div>
+            <div class="row game-row-4"></div>
             <div class="row game-row-5">
-              <div class="d-flex col justify-content-center">
-                <div class="d-flex flex-column justify-content-sm-center justify-content-end">
-                  <button id="roll-dice" class="action mb-2"><i class="bi bi-arrow-repeat me-2"></i><span class="text-uppercase">Roll dice</span></button>
-                  <button id="hold-score" class="action"><i class="bi bi-box-arrow-in-down me-2"></i><span class="text-uppercase">Hold</span></button>
+              <div class="col d-flex justify-content-center align-items-start align-items-sm-center">
+                <div class="current-score-box d-flex flex-column justify-content-center align-items-center bg-primary">
+                  <div class="fs-6 text-uppercase">Current</div>
+                  <div class="fs-3 text-white player-current-score">0</div>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div id="action" class="position-absolute top-0 bottom-0 start-0 end-0 d-flex justify-content-center">
+            <div class="container h-100 w-100">
+              <div class="row game-row-1">
+                <div class="col d-flex justify-content-center align-items-center">
+                  <button id="new-game" class="action"><i class="bi bi-plus-circle me-2"></i><span class="text-uppercase">New game</span></button>
+                </div>
+              </div>
+              <div class="row game-row-2"></div>
+              <div class="row game-row-3">
+                <div class="col d-flex justify-content-center align-items-end align-items-sm-center position-relative">
+                  <canvas id="dice" width="88px" height="88px" class="bg-white shadow position-absolute"></canvas>
+                </div>
+              </div>
+              <div class="row game-row-4">
+                <div id="message-box" class="text-primary fs-2 text-center m-auto"></div>
+              </div>
+              <div class="row game-row-5">
+                <div class="d-flex col justify-content-center">
+                  <div class="d-flex flex-column justify-content-sm-center justify-content-end">
+                    <button id="roll-dice" class="action mb-2"><i class="bi bi-arrow-repeat me-2"></i><span class="text-uppercase">Roll dice</span></button>
+                    <button id="hold-score" class="action"><i class="bi bi-box-arrow-in-down me-2"></i><span class="text-uppercase">Hold</span></button>
+                  </div>
                 </div>
               </div>
             </div>
           </div>
         </div>
-      </div>
-    </main>
+      </main>
+    </div>
     <script src="./node_modules/jquery/dist/jquery.min.js"></script>
     <script src="javascript/index.js" />
   </body>

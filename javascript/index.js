@@ -194,7 +194,7 @@ $(() => {
     if (elemRef[otherPlayer].playerDisplay.hasClass('current')) {
       elemRef[otherPlayer].playerDisplay.removeClass('current');
     }
-    elemRef[player].playerDisplay.addClass('current)');
+    elemRef[player].playerDisplay.addClass('current');
   };
   const setGameStatus = (status) => {
     game.gameStatus = status;
