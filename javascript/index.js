@@ -160,6 +160,8 @@ $(() => {
         btHold.prop('disabled', false);
         btRoll.prop('disabled', false);
         manageGame(actionType.rollResult);
+        dice.removeAttr('style');
+        dice.removeAttr('style');
       }
     );
   };
