@@ -10,17 +10,17 @@
   </head>
   <body class="d-flex justify-content-center align-items-center vh-100">
     <div class="wrapper">
-      <main class="container-fluid border border-primary border-5 position-relative h-100">
+      <main class="container-fluid border border-primary border-10 position-relative h-100">
         <div id="game" class="row h-100">
           <div id="player1" class="col current">
             <div class="row game-row-1"></div>
             <div class="row game-row-2">
               <div class="col player-title d-flex justify-content-center align-items-center">
-                <h2 class="text-uppercase">Player 1</h2>
+                <h2 class="text-uppercase d-flex fw-lighter">Player 1</h2>
               </div>
             </div>
             <div class="row game-row-3">
-              <div class="col d-flex justify-content-center align-items-start align-items-sm-center player-global-score lh-1">0</div>
+              <div class="col d-flex justify-content-center align-items-start align-items-sm-center player-global-score lh-1 text-primary fw-lighter">0</div>
             </div>
             <div class="row game-row-4"></div>
             <div class="row game-row-5">
@@ -36,11 +36,11 @@
             <div class="row game-row-1"></div>
             <div class="row game-row-2">
               <div class="col player-title d-flex justify-content-center align-items-center">
-                <h2 class="text-uppercase">Player 2</h2>
+                <h2 class="text-uppercase d-flex fw-lighter">Player 2</h2>
               </div>
             </div>
             <div class="row game-row-3">
-              <div class="col d-flex justify-content-center align-items-start align-items-sm-center player-global-score lh-1">0</div>
+              <div class="col d-flex justify-content-center align-items-start align-items-sm-center player-global-score lh-1 text-primary fw-lighter">0</div>
             </div>
             <div class="row game-row-4"></div>
             <div class="row game-row-5">
@@ -62,7 +62,7 @@
               <div class="row game-row-2"></div>
               <div class="row game-row-3">
                 <div class="col d-flex justify-content-center align-items-end align-items-sm-center position-relative">
-                  <canvas id="dice" width="88px" height="88px" class="bg-white shadow position-absolute"></canvas>
+                  <canvas id="dice" width="88px" height="88px" class="bg-white shadow position-absolute text-primary"></canvas>
                 </div>
               </div>
               <div class="row game-row-4">
@@ -71,7 +71,7 @@
               <div class="row game-row-5">
                 <div class="d-flex col justify-content-center">
                   <div class="d-flex flex-column justify-content-sm-center justify-content-end">
-                    <button id="roll-dice" class="action mb-2"><i class="bi bi-arrow-repeat me-2"></i><span class="text-uppercase">Roll dice</span></button>
+                    <button id="roll-dice" class="action mb-3"><i class="bi bi-arrow-repeat me-2"></i><span class="text-uppercase">Roll dice</span></button>
                     <button id="hold-score" class="action"><i class="bi bi-box-arrow-in-down me-2"></i><span class="text-uppercase">Hold</span></button>
                   </div>
                 </div>

@@ -1,4 +1,3 @@
-/*@import 'cssReset';*/
 @import 'font';
 @import 'customBS';
 
@@ -29,9 +28,15 @@
 
 .game-row-3 {
   height: 30%;
+  @media (min-height: 650px) {
+    height: calc(30% - 30px);
+  }
 }
 .game-row-4 {
   height: 50px;
+  @media (min-height: 650px) {
+    height: 80px;
+  }
 }
 .game-row-5 {
   height: calc(35% - 50px);
@@ -52,15 +57,31 @@
   font-family: bootstrap-icons;
   font-size: 16px;
   padding-left: 10px;
+  align-self: center;
+  color: $primary;
+}
+#player1:not(.current) h2,
+#player2:not(.current) h2 {
+  color: $gray-500;
+  font-weight: lighter;
 }
 
 button.action {
   border: none;
   background-color: transparent;
+  color: $primary;
+  font-weight: 300;
+  span {
+    color: $dark;
+  }
+  &:disabled {
+    span {
+      color: $gray-400;
+    }
+  }
 }
 @media (hover: hover) {
   button.action:hover:not(:disabled) {
-    color: $success;
     transform: scale(1.1, 1.1);
   }
 }

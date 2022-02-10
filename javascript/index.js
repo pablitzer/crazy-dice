@@ -1,7 +1,7 @@
 $(() => {
-  //--------------------------
-  // Initalize game status
-  //--------------------------
+  //------------------------------------
+  // Initalize game status and constants
+  //------------------------------------
   const state = {
     iddle: 0,
     started: 0,
@@ -14,6 +14,8 @@ $(() => {
     rollResult: 3,
     winGame: 4,
   };
+  const player1 = 0;
+  const player2 = 1;
 
   const game = {
     currentPlayer: undefined,
@@ -70,7 +72,7 @@ $(() => {
   });
 
   //--------------------------------
-  // display Dice
+  // manage the display of the Dice
   //--------------------------------
 
   function drawDice(value) {
@@ -109,9 +111,9 @@ $(() => {
     ];
 
     const ctx = dice.get(0).getContext('2d');
-    ctx.fillStyle = '#ffffff';
+    ctx.fillStyle = dice.css('background-color');
     ctx.fillRect(0, 0, 88, 88);
-    ctx.fillStyle = '#000000';
+    ctx.fillStyle = dice.css('color');
 
     const currentConfig = diceConfig[value - 1];
     for (let r = 0; r < 3; r++) {
@@ -130,10 +132,8 @@ $(() => {
   //-------------------------------
   // manage and animate roll dice
   //-------------------------------
-  const rollDice = () => {
+  const rollDice = (nextActionFunc) => {
     game.rollResult = Math.floor(Math.random() * 6) + 1;
-    btHold.prop('disabled', true);
-    btRoll.prop('disabled', true);
     for (let i = 0; i < 10; i++) {
       dice.animate(
         {
@@ -157,11 +157,13 @@ $(() => {
       50,
       'swing',
       () => {
-        btHold.prop('disabled', false);
-        btRoll.prop('disabled', false);
-        manageGame(actionType.rollResult);
-        dice.removeAttr('style');
-        dice.removeAttr('style');
+        dice.removeAttr('style'); // clean style added by animation
+        dice.removeAttr('style'); // clean style added by animation
+
+        // display result
+        drawDice(game.rollResult);
+        // execute next action if any
+        nextActionFunc && nextActionFunc();
       }
     );
   };
@@ -175,15 +177,59 @@ $(() => {
   };
 
   //----------------------------------
+  // Animate score increment
+  //----------------------------------
+  const animateScore = (elem, fromScore, addScore, cleanFunc) => {
+    for (let i = 1; i <= addScore; i++) {
+      elem.animate(
+        { Counter: 0 },
+        {
+          duration: 300 / addScore,
+          easing: 'swing',
+          step: function () {
+            elem.text(fromScore + i);
+          },
+        }
+      );
+    }
+    elem.animate({ Counter: 0 }, 0, cleanFunc); // a last animation for running next action at the end
+  };
+
+  //----------------------------------
+  // Disable / Enable actions
+  //----------------------------------
+  const disableActions = (rollDice = true, holdScore = true, newGame = true) => {
+    holdScore && btHold.prop('disabled', true);
+    rollDice && btRoll.prop('disabled', true);
+    newGame && btNew.prop('disabled', true);
+  };
+  const enableActions = (rollDice = true, holdScore = true, newGame = true) => {
+    holdScore && btHold.prop('disabled', false);
+    rollDice && btRoll.prop('disabled', false);
+    newGame && btNew.prop('disabled', false);
+  };
+
+  //----------------------------------
   // set and display functions
   //----------------------------------
-  const setGlobalScore = (player, score) => {
-    game.scores[player].globalScore = score;
-    elemRef[player].globalScore.text(String(score));
+
+  const setGlobalScore = (player, fromScore, addScore = 0, nextActionFunc) => {
+    game.scores[player].globalScore = fromScore + addScore;
+    if (addScore > 0) {
+      animateScore(elemRef[player].globalScore, fromScore, addScore, nextActionFunc);
+    } else {
+      elemRef[player].globalScore.text(fromScore);
+      nextActionFunc && nextActionFunc();
+    }
   };
-  const setCurrentScore = (player, score) => {
-    game.scores[player].currentScore = score;
-    elemRef[player].currentScore.text(String(score));
+  const setCurrentScore = (player, fromScore, addScore = 0, nextActionFunc) => {
+    game.scores[player].currentScore = fromScore + addScore;
+    if (addScore > 0) {
+      animateScore(elemRef[player].currentScore, fromScore, addScore, nextActionFunc);
+    } else {
+      elemRef[player].currentScore.text(fromScore);
+      nextActionFunc && nextActionFunc();
+    }
   };
   const setCurrentPlayer = (player) => {
     game.currentPlayer = player;
@@ -196,6 +242,7 @@ $(() => {
     }
     elemRef[player].playerDisplay.addClass('current');
   };
+
   const setGameStatus = (status) => {
     game.gameStatus = status;
   };
@@ -208,52 +255,74 @@ $(() => {
     switch (action) {
       case actionType.newGame:
         setGameStatus(state.started);
-        setGlobalScore(0, 0);
-        setGlobalScore(1, 0);
-        setCurrentScore(0, 0);
-        setCurrentScore(1, 0);
-        setCurrentPlayer(Math.floor(Math.random() * 100) + 1 > 50 ? 1 : 0);
-        btHold.prop('disabled', false);
-        btRoll.prop('disabled', false);
+        setGlobalScore(player1, 0);
+        setGlobalScore(player2, 0);
+        setCurrentScore(player1, 0);
+        setCurrentScore(player2, 0);
+        setCurrentPlayer(Math.floor(Math.random() * 100) + 1 > 50 ? player1 : player2);
+        enableActions();
         drawDice(6);
         displayMessage(`Player ${game.currentPlayer + 1} starts!`);
         break;
+
       case actionType.holdScore:
-        setGlobalScore(game.currentPlayer, game.scores[game.currentPlayer].globalScore + game.scores[game.currentPlayer].currentScore);
-        setCurrentScore(game.currentPlayer, 0);
-        if (game.scores[game.currentPlayer].globalScore >= 100) {
-          manageGame(actionType.winGame);
-          displayMessage(`Player ${game.currentPlayer + 1} wins!`);
-        } else {
-          setCurrentPlayer(game.currentPlayer === 0 ? 1 : 0);
-        }
+        // disable actions buttons for the processing
+        disableActions();
+        // send current score to global, manage game winner (if >=100) or turn change , enable action button
+        setGlobalScore(game.currentPlayer, game.scores[game.currentPlayer].globalScore, game.scores[game.currentPlayer].currentScore, () => {
+          setCurrentScore(game.currentPlayer, 0, 0, () => {
+            if (game.scores[game.currentPlayer].globalScore >= 100) {
+              manageGame(actionType.winGame);
+            } else {
+              setCurrentPlayer(game.currentPlayer === player1 ? player2 : player1);
+              enableActions();
+            }
+          });
+        });
+
         break;
+
       case actionType.rollDice:
         {
-          rollDice();
+          // disable action buttons during processing
+          disableActions();
+          // run roll dice and then manage the result
+          rollDice(() => {
+            manageGame(actionType.rollResult);
+          });
         }
         break;
-      case actionType.rollResult:
-        drawDice(game.rollResult);
-        if (game.rollResult === 1) {
-          // loose on 1 => player change / no score added
-          setCurrentScore(game.currentPlayer, 0);
-          setCurrentPlayer(game.currentPlayer === 0 ? 1 : 0);
-          displayMessage('Sorry : turn over');
-        } else {
-          setCurrentScore(game.currentPlayer, game.scores[game.currentPlayer].currentScore + game.rollResult);
-        }
-        break;
-      case actionType.winGame:
-        btHold.prop('disabled', true);
-        btRoll.prop('disabled', true);
 
+      case actionType.rollResult:
+        // manage the result of the roll
+        if (game.rollResult === 1) {
+          // loose on 1 => player change / no score added / enable actions
+          setCurrentScore(game.currentPlayer, 0, 0, () => {
+            setCurrentPlayer(game.currentPlayer === player1 ? player2 : player1);
+            displayMessage('Oops! Sorry, the turn changes');
+            enableActions();
+          });
+        } else {
+          // add current to global and enable actions button
+          setCurrentScore(game.currentPlayer, game.scores[game.currentPlayer].currentScore, game.rollResult, enableActions);
+        }
+
+        break;
+
+      case actionType.winGame:
+        // display a message fot the winner , enable new game button ,disable other buttons
+        displayMessage(`Player ${game.currentPlayer + 1} wins!`);
+        enableActions(false, false, true);
+        disableActions(true, true, false);
+        break;
+
+      default:
         break;
     }
   };
-  //---------------------
-  // New game at start
-  //---------------------
+  //-------------------------
+  // Run a new game at start
+  //-------------------------
 
   manageGame(actionType.newGame);
 });
