@@ -5,7 +5,7 @@
   "main": "index.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-    "build": "chmod +x script/build.sh && script/build.sh"
+    "build": "chmod +x $INIT_CWD/script/build.sh && $INIT_CWD/script/build.sh"
   },
   "repository": {
     "type": "git",

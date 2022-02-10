@@ -1,6 +1,6 @@
-if [ -d lib ] 
+if [ -d $INIT_CWD/lib ] 
 then
-  rm -r lib && mkdir lib
+  rm -r $INIT_CWD/lib && mkdir $INIT_CWD/lib
 fi
-cp -R node_modules/bootstrap-icons lib/bootstrap-icons;
-cp -R node_modules/jquery lib/jquery;
+cp -R $INIT_CWD/node_modules/bootstrap-icons $INIT_CWD/lib/bootstrap-icons;
+cp -R $INIT_CWD/node_modules/jquery $INIT_CWD/lib/jquery;
