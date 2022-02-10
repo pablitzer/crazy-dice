@@ -1,4 +1,3 @@
-console.log('hello');
 $(() => {
   //------------------------------------
   // Initalize game status and constants
