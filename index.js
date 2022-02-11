@@ -299,7 +299,7 @@ $(() => {
           // loose on 1 => player change / no score added / enable actions
           setCurrentScore(game.currentPlayer, 0, 0, () => {
             setCurrentPlayer(game.currentPlayer === player1 ? player2 : player1);
-            displayMessage('Oops! Sorry, the turn changes');
+            displayMessage('Oops! The turn changes');
             enableActions();
           });
         } else {

@@ -11970,8 +11970,8 @@ fieldset:disabled .btn {
 }
 
 .wrapper {
-  min-width: 280px;
-  min-height: 340px;
+  min-width: 300px;
+  min-height: 360px;
   height: 100vh;
   width: 100vw;
 }
@@ -11990,38 +11990,40 @@ fieldset:disabled .btn {
   background-color: #f8f9fa;
 }
 
+/*
 .game-row-1 {
-  height: 15%;
+  height: 40px;
 }
-
 .game-row-2 {
-  height: 15%;
+  height: 10%;
+  min-height: 40px;
 }
 
 .game-row-3 {
-  height: 30%;
-}
-
-@media (min-height: 650px) {
-  .game-row-3 {
-    height: calc(30% - 30px);
+  height: 35%;
+  @media (min-height: 650px) {
+    height: calc(35% - 30px);
   }
 }
-
 .game-row-4 {
-  height: 50px;
-}
-
-@media (min-height: 650px) {
-  .game-row-4 {
+  visibility: hidden;
+  height: 10px;
+  @media (min-height: 380px) {
+    visibility: visible;
+    height: 30px;
+  }
+  @media (min-height: 650px) {
+    visibility: visible;
     height: 80px;
   }
 }
-
 .game-row-5 {
-  height: calc(35% - 50px);
+  height: calc(45% - 10px);
+  @media (min-height: 600px) {
+    height: calc(25%);
+  }
 }
-
+*/
 .player-global-score {
   font-size: 80px;
 }
