@@ -20,35 +20,34 @@
 }
 
 .game-row-1 {
-  height: 40px;
+  height: 50px;
+  @media (min-height: 600px) {
+    height: 80px;
+  }
 }
 .game-row-2 {
-  height: 10%;
-  min-height: 40px;
+  height: 40px;
+  @media (min-height: 600px) {
+    height: 80px;
+  }
 }
-
 .game-row-3 {
-  height: 35%;
-  @media (min-height: 650px) {
-    height: calc(35% - 30px);
+  height: calc(55% - 90px);
+  @media (min-height: 600px) {
+    height: calc(50% - 110px);
   }
 }
 .game-row-4 {
-  visibility: hidden;
-  height: 10px;
-  @media (min-height: 380px) {
-    visibility: visible;
-    height: 30px;
-  }
-  @media (min-height: 650px) {
-    visibility: visible;
+  height: 40px;
+  @media (min-height: 600px) {
     height: 80px;
   }
 }
 .game-row-5 {
-  height: calc(45% - 10px);
+  height: calc(45% - 40px);
   @media (min-height: 600px) {
-    height: calc(25%);
+    height: calc(50% - 160px);
+    margin-bottom: 30px;
   }
 }
 

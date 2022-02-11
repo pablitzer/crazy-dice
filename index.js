@@ -122,7 +122,7 @@ $(() => {
           ctx.save();
           ctx.translate(22 + c * 22, 22 + r * 22);
           ctx.beginPath();
-          ctx.arc(0, 0, 10, 0, 2 * Math.PI);
+          ctx.arc(0, 0, 8, 0, 2 * Math.PI);
           ctx.fill();
           ctx.restore();
         }
