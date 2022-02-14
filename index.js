@@ -1,3 +1,12 @@
+/*-----------------------------------------------------------------------------------------------------
+Author : Pascal Ablitzer
+Description : manage Dice Game
+- Start a new Game with 2 players, choose randomly first player
+- Roll Dice : simulate roll dice and add result to the current score if <> 1 else reset current score to 0 and Change player
+- Hold Score : add current score  to global score and if player has not reached 100, change turn
+- Win Game : player reached global score of 100, wait for new game
+-------------------------------------------------------------------------------------------------------*/
+
 $(() => {
   //------------------------------------
   // Initalize game status and constants
@@ -254,19 +263,21 @@ $(() => {
   const manageGame = (action) => {
     switch (action) {
       case actionType.newGame:
+        // reinit scores and game status
         setGameStatus(state.started);
         setGlobalScore(player1, 0);
         setGlobalScore(player2, 0);
         setCurrentScore(player1, 0);
         setCurrentScore(player2, 0);
-        setCurrentPlayer(Math.floor(Math.random() * 100) + 1 > 50 ? player1 : player2);
-        enableActions();
         drawDice(6);
+        // choose first player randomly
+        setCurrentPlayer(Math.floor(Math.random() * 100) + 1 > 50 ? player1 : player2);
         displayMessage(`Player ${game.currentPlayer + 1} starts!`);
+        enableActions();
         break;
 
       case actionType.holdScore:
-        // disable actions buttons for the processing
+        // disable actions buttons for the processing duration
         disableActions();
         // send current score to global, manage game winner (if >=100) or turn change , enable action button
         setGlobalScore(game.currentPlayer, game.scores[game.currentPlayer].globalScore, game.scores[game.currentPlayer].currentScore, () => {
